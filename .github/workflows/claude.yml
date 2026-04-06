@@ -19,32 +19,94 @@ jobs:
       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: read
-      issues: read
+      contents: write
+      pull-requests: write
+      issues: write
       id-token: write
-      actions: read # Required for Claude to read CI results on PRs
+      actions: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: uigen/package-lock.json
+
+      - name: Install dependencies
+        working-directory: uigen
+        run: npm ci
+
+      - name: Setup database
+        working-directory: uigen
+        run: |
+          npx prisma generate
+          npx prisma migrate deploy
+
+      - name: Install Playwright browsers
+        working-directory: uigen
+        run: npx playwright install --with-deps chromium
+
+      - name: Start dev server
+        working-directory: uigen
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npm run dev:daemon
+
+      - name: Wait for dev server
+        run: |
+          echo "Waiting for Next.js dev server at http://localhost:3000..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3000 > /dev/null 2>&1; then
+              echo "Server ready after $((i * 2))s"
+              break
+            fi
+            sleep 2
+            if [ "$i" -eq 30 ]; then
+              echo "ERROR: Server did not start within 60s. Dumping logs:"
+              cat uigen/logs.txt
+              exit 1
+            fi
+          done
+
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-
-          # This is an optional setting that allows Claude to read CI results on PRs
-          additional_permissions: |
-            actions: read
-
-          # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
-          # prompt: 'Update the pull request description to include a summary of changes.'
-
-          # Optional: Add claude_args to customize behavior and configuration
-          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
-          # or https://code.claude.com/docs/en/cli-reference for available options
-          # claude_args: '--allowed-tools Bash(gh pr:*)'
-
+          mcp_config: |
+            {
+              "mcpServers": {
+                "playwright": {
+                  "command": "npx",
+                  "args": ["@playwright/mcp@latest", "--headless"]
+                }
+              }
+            }
+          allowed_tools: |
+            Bash
+            mcp__playwright__browser_navigate
+            mcp__playwright__browser_snapshot
+            mcp__playwright__browser_take_screenshot
+            mcp__playwright__browser_click
+            mcp__playwright__browser_type
+            mcp__playwright__browser_fill_form
+            mcp__playwright__browser_select_option
+            mcp__playwright__browser_press_key
+            mcp__playwright__browser_hover
+            mcp__playwright__browser_drag
+            mcp__playwright__browser_evaluate
+            mcp__playwright__browser_run_code
+            mcp__playwright__browser_wait_for
+            mcp__playwright__browser_navigate_back
+            mcp__playwright__browser_tabs
+            mcp__playwright__browser_close
+            mcp__playwright__browser_resize
+            mcp__playwright__browser_network_requests
+            mcp__playwright__browser_console_messages
+            mcp__playwright__browser_handle_dialog
+            mcp__playwright__browser_file_upload
