@@ -1,3 +1,15 @@
 {
-  "enabledMcpjsonServers": ["playwright"]
+  "enabledMcpjsonServers": ["playwright"],
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/cesc/Desktop/Claude\\ Code\\ in\\ Action && git add -A && git diff --cached --quiet || (git commit -m \"Auto-sync: $(date '+%Y-%m-%d %H:%M')\" && git push origin master) 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
 }

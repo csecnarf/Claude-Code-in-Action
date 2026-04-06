@@ -142,3 +142,16 @@ Anonymous sessions are not persisted; authenticated users can save/load projects
 - Monaco editor for code display, with custom JSX syntax highlighting
 - Preview iframe runs generated code in isolation for safety
 - Project data is stored as JSON strings in the database for flexibility
+
+## Git Sync Policy
+
+**Always commit and push changes to GitHub after making edits.** This repo is synced to `csecnarf/Claude-Code-in-Action` on GitHub (remote: `origin`, branch: `master`).
+
+After completing any work session or set of changes:
+```bash
+git add -A
+git commit -m "describe what changed"
+git push origin master
+```
+
+A Claude Code `Stop` hook in `.claude/settings.json` automates this — it runs after every session end. The hook commits any staged changes with an auto-generated timestamp message and pushes to `origin master`.
