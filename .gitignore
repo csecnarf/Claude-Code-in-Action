@@ -12,6 +12,8 @@ eggs/
 .eggs/
 lib/
 lib64/
+!uigen/src/lib/
+!uigen/src/lib/**
 parts/
 sdist/
 var/

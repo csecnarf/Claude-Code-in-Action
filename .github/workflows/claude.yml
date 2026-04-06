@@ -59,10 +59,11 @@ jobs:
 
       - name: Wait for dev server
         run: |
-          echo "Waiting for Next.js dev server at http://localhost:3000..."
+          echo "Waiting for Next.js dev server..."
           for i in $(seq 1 30); do
-            if curl -sf http://localhost:3000 > /dev/null 2>&1; then
+            if grep -q "Ready in" uigen/logs.txt 2>/dev/null; then
               echo "Server ready after $((i * 2))s"
+              grep "Ready in\|Local:" uigen/logs.txt
               break
             fi
             sleep 2
