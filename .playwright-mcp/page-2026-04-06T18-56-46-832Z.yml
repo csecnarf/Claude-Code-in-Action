@@ -1,0 +1,174 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - heading "React Component Generator" [level=1] [ref=e7]
+      - generic [ref=e9]:
+        - generic [ref=e14]:
+          - generic [ref=e50]:
+            - generic [ref=e53]: Create a pricing card component with a title, price, list of features and a CTA button
+            - img [ref=e56]
+          - generic [ref=e59]:
+            - img [ref=e62]
+            - generic [ref=e67]:
+              - generic [ref=e71]: Creating App.jsx
+              - separator [ref=e77]
+              - generic [ref=e80]: Creating PricingCard.jsx
+              - separator [ref=e81]
+              - generic [ref=e82]:
+                - paragraph [ref=e83]: "Here's what was built:"
+                - list [ref=e84]:
+                  - listitem [ref=e85]:
+                    - paragraph [ref=e86]:
+                      - strong [ref=e87]:
+                        - code [ref=e115]: /components/PricingCard.jsx
+                      - text: "— The reusable card component accepting these props:"
+                    - list [ref=e89]:
+                      - listitem [ref=e90]:
+                        - code [ref=e116]: title
+                        - text: — Plan name
+                      - listitem [ref=e92]:
+                        - code [ref=e117]: price
+                        - text: — Monthly price (number)
+                      - listitem [ref=e94]:
+                        - code [ref=e118]: description
+                        - text: — Short tagline
+                      - listitem [ref=e96]:
+                        - code [ref=e119]: features
+                        - text: — Array of feature strings, each with a checkmark icon
+                      - listitem [ref=e98]:
+                        - code [ref=e120]: cta
+                        - text: — Button label
+                      - listitem [ref=e100]:
+                        - code [ref=e121]: highlighted
+                        - text: — Boolean that triggers the featured/popular styling
+                  - listitem [ref=e102]:
+                    - paragraph [ref=e103]:
+                      - strong [ref=e104]:
+                        - code [ref=e122]: /App.jsx
+                      - text: — Renders three demo cards (Starter, Pro, Enterprise) on a dark gradient background
+                - heading "Highlights" [level=3] [ref=e106]
+                - list [ref=e107]:
+                  - listitem [ref=e108]:
+                    - text: ✅ The
+                    - strong [ref=e109]: Pro
+                    - text: card is elevated with a "Most Popular" badge, an indigo accent, and a subtle
+                    - code [ref=e123]: scale-105
+                  - listitem [ref=e111]:
+                    - text: ✅ Hover lifts each card with a smooth
+                    - code [ref=e124]: "-translate-y-1"
+                    - text: transition
+                  - listitem [ref=e113]: ✅ Fully responsive — stacks vertically on mobile, side-by-side on large screens
+        - generic [ref=e22]:
+          - textbox "Describe the React component you want to create..." [ref=e23]
+          - button [disabled] [ref=e24]:
+            - img [ref=e25]
+    - separator [ref=e28]
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - tablist [ref=e33]:
+          - tab "Preview" [ref=e34]
+          - tab "Code" [active] [selected] [ref=e35]
+        - generic [ref=e36]:
+          - button "Sign In" [ref=e37]
+          - button "Sign Up" [ref=e38]
+      - generic [ref=e125]:
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - generic [ref=e133] [cursor=pointer]:
+              - img [ref=e134]
+              - img [ref=e136]
+              - generic [ref=e138]: components
+            - generic [ref=e141] [cursor=pointer]:
+              - img [ref=e142]
+              - generic [ref=e147]: PricingCard.jsx
+          - generic [ref=e149] [cursor=pointer]:
+            - img [ref=e150]
+            - generic [ref=e155]: App.jsx
+        - separator [ref=e156]
+        - code [ref=e161]:
+          - generic [ref=e162]:
+            - generic [ref=e164]:
+              - generic [ref=e167]: "1"
+              - generic [ref=e171]: "2"
+              - generic [ref=e172]:
+                - generic [ref=e173] [cursor=pointer]: 
+                - generic [ref=e174]: "3"
+              - generic [ref=e175]:
+                - generic [ref=e176] [cursor=pointer]: 
+                - generic [ref=e177]: "4"
+              - generic [ref=e179]: "5"
+              - generic [ref=e181]: "6"
+              - generic [ref=e183]: "7"
+              - generic [ref=e185]:
+                - generic [ref=e186] [cursor=pointer]: 
+                - generic [ref=e187]: "8"
+              - generic [ref=e189]: "9"
+              - generic [ref=e191]: "10"
+              - generic [ref=e193]: "11"
+              - generic [ref=e195]: "12"
+              - generic [ref=e197]: "13"
+              - generic [ref=e199]: "14"
+              - generic [ref=e201]: "15"
+              - generic [ref=e203]: "16"
+              - generic [ref=e205]: "17"
+              - generic [ref=e206]:
+                - generic [ref=e207] [cursor=pointer]: 
+                - generic [ref=e208]: "18"
+              - generic [ref=e210]: "19"
+              - generic [ref=e212]: "20"
+              - generic [ref=e214]: "21"
+              - generic [ref=e216]:
+                - generic [ref=e217] [cursor=pointer]: 
+                - generic [ref=e218]: "22"
+              - generic [ref=e220]: "23"
+              - generic [ref=e222]: "24"
+              - generic [ref=e224]: "25"
+              - generic [ref=e226]: "26"
+              - generic [ref=e228]: "27"
+              - generic [ref=e230]: "28"
+              - generic [ref=e232]: "29"
+              - generic [ref=e234]: "30"
+              - generic [ref=e236]: "31"
+              - generic [ref=e238]: "32"
+              - generic [ref=e240]: "33"
+            - generic [ref=e352]:
+              - generic [ref=e354]: import PricingCard from "@/components/
+              - generic [ref=e356]: PricingCard";
+              - generic [ref=e359]: const plans = [
+              - generic [ref=e361]: "{"
+              - generic [ref=e363]: "title: \"Starter\","
+              - generic [ref=e365]: "price: 9,"
+              - generic [ref=e367]: "description: \"Perfect for"
+              - generic [ref=e369]: individuals and small projects.",
+              - generic [ref=e371]: "features: ["
+              - generic [ref=e373]: "\"5 Projects\","
+              - generic [ref=e375]: "\"10 GB Storage\","
+              - generic [ref=e377]: "\"Basic Analytics\","
+              - generic [ref=e379]: "\"Email Support\","
+              - generic [ref=e381]: "\"API Access\","
+              - generic [ref=e383]: "],"
+              - generic [ref=e385]: "cta: \"Get Started\","
+              - generic [ref=e387]: "highlighted: false,"
+              - generic [ref=e389]: "},"
+              - generic [ref=e391]: "{"
+              - generic [ref=e393]: "title: \"Pro\","
+              - generic [ref=e395]: "price: 29,"
+              - generic [ref=e397]: "description: \"Great for growing"
+              - generic [ref=e399]: teams and businesses.",
+              - generic [ref=e401]: "features: ["
+              - generic [ref=e403]: "\"Unlimited Projects\","
+              - generic [ref=e405]: "\"100 GB Storage\","
+              - generic [ref=e407]: "\"Advanced Analytics\","
+              - generic [ref=e409]: "\"Priority Support\","
+              - generic [ref=e411]: "\"API Access\","
+              - generic [ref=e413]: "\"Custom Integrations\","
+              - generic [ref=e415]: "\"Team Collaboration\","
+              - generic [ref=e417]: "],"
+              - generic [ref=e419]: "cta: \"Get Started\","
+              - generic [ref=e421]: "highlighted: true,"
+              - generic [ref=e423]: "},"
+            - textbox "Editor content" [ref=e427]
+  - alert [ref=e49]
+  - generic [ref=e428]:
+    - alert
+    - alert

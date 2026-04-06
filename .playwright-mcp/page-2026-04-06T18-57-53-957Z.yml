@@ -1,0 +1,171 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - heading "React Component Generator" [level=1] [ref=e7]
+      - generic [ref=e9]:
+        - generic [ref=e14]:
+          - generic [ref=e50]:
+            - generic [ref=e53]: Create a pricing card component with a title, price, list of features and a CTA button
+            - img [ref=e56]
+          - generic [ref=e59]:
+            - img [ref=e62]
+            - generic [ref=e67]:
+              - generic [ref=e71]: Creating App.jsx
+              - separator [ref=e77]
+              - generic [ref=e80]: Creating PricingCard.jsx
+              - separator [ref=e81]
+              - generic [ref=e82]:
+                - paragraph [ref=e83]: "Here's what was built:"
+                - list [ref=e84]:
+                  - listitem [ref=e85]:
+                    - paragraph [ref=e86]:
+                      - strong [ref=e87]:
+                        - code [ref=e665]: /components/PricingCard.jsx
+                      - text: "— The reusable card component accepting these props:"
+                    - list [ref=e89]:
+                      - listitem [ref=e90]:
+                        - code [ref=e666]: title
+                        - text: — Plan name
+                      - listitem [ref=e92]:
+                        - code [ref=e667]: price
+                        - text: — Monthly price (number)
+                      - listitem [ref=e94]:
+                        - code [ref=e668]: description
+                        - text: — Short tagline
+                      - listitem [ref=e96]:
+                        - code [ref=e669]: features
+                        - text: — Array of feature strings, each with a checkmark icon
+                      - listitem [ref=e98]:
+                        - code [ref=e670]: cta
+                        - text: — Button label
+                      - listitem [ref=e100]:
+                        - code [ref=e671]: highlighted
+                        - text: — Boolean that triggers the featured/popular styling
+                  - listitem [ref=e102]:
+                    - paragraph [ref=e103]:
+                      - strong [ref=e104]:
+                        - code [ref=e672]: /App.jsx
+                      - text: — Renders three demo cards (Starter, Pro, Enterprise) on a dark gradient background
+                - heading "Highlights" [level=3] [ref=e106]
+                - list [ref=e107]:
+                  - listitem [ref=e108]:
+                    - text: ✅ The
+                    - strong [ref=e109]: Pro
+                    - text: card is elevated with a "Most Popular" badge, an indigo accent, and a subtle
+                    - code [ref=e673]: scale-105
+                  - listitem [ref=e111]:
+                    - text: ✅ Hover lifts each card with a smooth
+                    - code [ref=e674]: "-translate-y-1"
+                    - text: transition
+                  - listitem [ref=e113]: ✅ Fully responsive — stacks vertically on mobile, side-by-side on large screens
+        - generic [ref=e22]:
+          - textbox "Describe the React component you want to create..." [ref=e23]
+          - button [disabled] [ref=e24]:
+            - img [ref=e25]
+    - separator [ref=e28]
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - tablist [ref=e33]:
+          - tab "Preview" [active] [selected] [ref=e34]
+          - tab "Code" [ref=e35]
+        - generic [ref=e36]:
+          - button "Sign In" [ref=e37]
+          - button "Sign Up" [ref=e38]
+      - iframe [ref=e676]:
+        - generic [ref=f14e3]:
+          - generic [ref=f14e4]:
+            - heading "Simple, Transparent Pricing" [level=1] [ref=f14e5]
+            - paragraph [ref=f14e6]: Choose the plan that works best for you.
+          - generic [ref=f14e7]:
+            - generic [ref=f14e8]:
+              - generic [ref=f14e9]:
+                - heading "Starter" [level=2] [ref=f14e10]
+                - paragraph [ref=f14e11]: Perfect for individuals and small projects.
+              - generic [ref=f14e12]:
+                - generic [ref=f14e13]: $9
+                - generic [ref=f14e14]: / month
+              - list [ref=f14e15]:
+                - listitem [ref=f14e16]:
+                  - img [ref=f14e17]
+                  - generic [ref=f14e19]: 5 Projects
+                - listitem [ref=f14e20]:
+                  - img [ref=f14e21]
+                  - generic [ref=f14e23]: 10 GB Storage
+                - listitem [ref=f14e24]:
+                  - img [ref=f14e25]
+                  - generic [ref=f14e27]: Basic Analytics
+                - listitem [ref=f14e28]:
+                  - img [ref=f14e29]
+                  - generic [ref=f14e31]: Email Support
+                - listitem [ref=f14e32]:
+                  - img [ref=f14e33]
+                  - generic [ref=f14e35]: API Access
+              - button "Get Started" [ref=f14e36] [cursor=pointer]
+            - generic [ref=f14e37]:
+              - generic [ref=f14e38]: Most Popular
+              - generic [ref=f14e39]:
+                - heading "Pro" [level=2] [ref=f14e40]
+                - paragraph [ref=f14e41]: Great for growing teams and businesses.
+              - generic [ref=f14e42]:
+                - generic [ref=f14e43]: $29
+                - generic [ref=f14e44]: / month
+              - list [ref=f14e45]:
+                - listitem [ref=f14e46]:
+                  - img [ref=f14e47]
+                  - generic [ref=f14e49]: Unlimited Projects
+                - listitem [ref=f14e50]:
+                  - img [ref=f14e51]
+                  - generic [ref=f14e53]: 100 GB Storage
+                - listitem [ref=f14e54]:
+                  - img [ref=f14e55]
+                  - generic [ref=f14e57]: Advanced Analytics
+                - listitem [ref=f14e58]:
+                  - img [ref=f14e59]
+                  - generic [ref=f14e61]: Priority Support
+                - listitem [ref=f14e62]:
+                  - img [ref=f14e63]
+                  - generic [ref=f14e65]: API Access
+                - listitem [ref=f14e66]:
+                  - img [ref=f14e67]
+                  - generic [ref=f14e69]: Custom Integrations
+                - listitem [ref=f14e70]:
+                  - img [ref=f14e71]
+                  - generic [ref=f14e73]: Team Collaboration
+              - button "Get Started" [ref=f14e74] [cursor=pointer]
+            - generic [ref=f14e75]:
+              - generic [ref=f14e76]:
+                - heading "Enterprise" [level=2] [ref=f14e77]
+                - paragraph [ref=f14e78]: For large-scale operations and enterprises.
+              - generic [ref=f14e79]:
+                - generic [ref=f14e80]: $79
+                - generic [ref=f14e81]: / month
+              - list [ref=f14e82]:
+                - listitem [ref=f14e83]:
+                  - img [ref=f14e84]
+                  - generic [ref=f14e86]: Unlimited Projects
+                - listitem [ref=f14e87]:
+                  - img [ref=f14e88]
+                  - generic [ref=f14e90]: 1 TB Storage
+                - listitem [ref=f14e91]:
+                  - img [ref=f14e92]
+                  - generic [ref=f14e94]: Full Analytics Suite
+                - listitem [ref=f14e95]:
+                  - img [ref=f14e96]
+                  - generic [ref=f14e98]: 24/7 Dedicated Support
+                - listitem [ref=f14e99]:
+                  - img [ref=f14e100]
+                  - generic [ref=f14e102]: API Access
+                - listitem [ref=f14e103]:
+                  - img [ref=f14e104]
+                  - generic [ref=f14e106]: Custom Integrations
+                - listitem [ref=f14e107]:
+                  - img [ref=f14e108]
+                  - generic [ref=f14e110]: Team Collaboration
+                - listitem [ref=f14e111]:
+                  - img [ref=f14e112]
+                  - generic [ref=f14e114]: SSO & Advanced Security
+              - button "Contact Sales" [ref=f14e115] [cursor=pointer]
+  - alert [ref=e49]
+  - generic [ref=e428]:
+    - alert
+    - alert

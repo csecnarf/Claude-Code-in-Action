@@ -1,0 +1,37 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - heading "React Component Generator" [level=1] [ref=e7]
+      - generic [ref=e9]:
+        - generic [ref=e14]:
+          - generic [ref=e50]:
+            - generic [ref=e53]: Create a pricing card component with a title, price, list of features and a CTA button
+            - img [ref=e56]
+          - generic [ref=e59]:
+            - img [ref=e62]
+            - generic [ref=e67]:
+              - generic [ref=e68]:
+                - img [ref=e69]
+                - generic [ref=e71]: Creating App.jsx
+              - generic [ref=e72]:
+                - img [ref=e73]
+                - generic [ref=e75]: Generating...
+        - generic [ref=e22]:
+          - textbox "Describe the React component you want to create..." [disabled] [ref=e23]
+          - button [disabled] [ref=e24]:
+            - img [ref=e25]
+    - separator [ref=e28]
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - tablist [ref=e33]:
+          - tab "Preview" [selected] [ref=e34]
+          - tab "Code" [ref=e35]
+        - generic [ref=e36]:
+          - button "Sign In" [ref=e37]
+          - button "Sign Up" [ref=e38]
+      - generic [ref=e42]:
+        - img [ref=e44]
+        - heading "Welcome to UI Generator" [level=3] [ref=e46]
+        - paragraph [ref=e47]: Start building React components with AI assistance
+        - paragraph [ref=e48]: Ask the AI to create your first component to see it live here
+  - alert [ref=e49]
