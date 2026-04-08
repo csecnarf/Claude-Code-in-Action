@@ -23,7 +23,7 @@ interface OrderDetails {
 
 export async function getOrderDetails(
   db: Database,
-  orderId: number
+  orderId: number,
 ): Promise<OrderDetails | null> {
   const query = `
     SELECT 
@@ -83,7 +83,7 @@ export async function getOrderDetails(
 export async function fetchCustomerOrders(
   db: Database,
   customerId: number,
-  limit: number = 10
+  limit: number = 10,
 ): Promise<any[]> {
   const query = `
     SELECT 
@@ -107,28 +107,36 @@ export async function fetchCustomerOrders(
   return rows;
 }
 
-export async function getPendingOrders(db: Database): Promise<any[]> {
+export async function getPendingOrders(
+  db: Database,
+  olderThanDays?: number,
+): Promise<
+  {
+    order_number: string;
+    customer_name: string;
+    phone: string;
+    days_pending: number;
+  }[]
+> {
   const query = `
-    SELECT 
-        o.order_id,
-        o.order_date,
-        o.total_amount,
-        c.first_name || ' ' || c.last_name as customer_name,
+    SELECT
+        o.order_number,
+        c.first_name || ' ' || c.last_name AS customer_name,
         c.phone,
-        julianday('now') - julianday(o.order_date) as days_since_created
+        CAST(julianday('now') - julianday(o.created_at) AS INTEGER) AS days_pending
     FROM orders o
-    JOIN customers c ON o.customer_id = c.customer_id
+    JOIN customers c ON o.customer_id = c.id
     WHERE o.status = 'pending'
-    ORDER BY o.order_date
-    `;
+      AND (? IS NULL OR julianday('now') - julianday(o.created_at) > ?)
+    ORDER BY o.created_at
+  `;
 
-  const rows = await db.all(query, []);
-  return rows;
+  return db.all(query, [olderThanDays ?? null, olderThanDays ?? null]);
 }
 
 export async function findOrdersByStatus(
   db: Database,
-  status: string
+  status: string,
 ): Promise<any[]> {
   const query = `
     SELECT DISTINCT
@@ -155,40 +163,19 @@ export async function findOrdersByStatus(
 
 export async function getRecentOrders(
   db: Database,
-  days: number = 7
+  days: number = 7,
 ): Promise<any[]> {
-  const query = `
-    SELECT DISTINCT
-        o.order_id,
-        o.order_date,
-        o.total_amount,
-        o.shipping_amount,
-        c.segment as customer_segment,
-        CASE 
-            WHEN o.shipping_amount = 0 THEN 'Free Shipping'
-            WHEN o.shipping_amount < 10 THEN 'Standard'
-            WHEN o.shipping_amount < 25 THEN 'Express'
-            ELSE 'Priority'
-        END as shipping_method,
-        GROUP_CONCAT(DISTINCT cat.name) as product_categories
-    FROM orders o
-    JOIN customers c ON o.customer_id = c.customer_id
-    LEFT JOIN order_items oi ON o.order_id = oi.order_id
-    LEFT JOIN products p ON oi.product_id = p.product_id
-    LEFT JOIN categories cat ON p.category_id = cat.category_id
-    WHERE o.order_date >= date('now', '-' || ? || ' days')
-    GROUP BY o.order_id, o.order_date, o.total_amount, o.shipping_amount, c.segment
-    ORDER BY o.order_date DESC
-    `;
-
-  const rows = await db.all(query, [days]);
-  return rows;
+  const end = new Date().toISOString().split("T")[0];
+  const start = new Date(Date.now() - days * 86400_000)
+    .toISOString()
+    .split("T")[0];
+  return fetchOrdersByDateRange(db, start, end);
 }
 
 export async function fetchOrdersByDateRange(
   db: Database,
   startDate: string,
-  endDate: string
+  endDate: string,
 ): Promise<any[]> {
   const query = `
     SELECT 
@@ -212,7 +199,7 @@ export async function fetchOrdersByDateRange(
 
 export async function getHighValueOrders(
   db: Database,
-  minAmount: number = 500
+  minAmount: number = 500,
 ): Promise<any[]> {
   const query = `
     WITH customer_ltv AS (

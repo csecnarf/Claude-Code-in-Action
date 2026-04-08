@@ -19,16 +19,6 @@ interface ProductByCategory {
   days_since_last_ordered: number | null;
 }
 
-interface LowStockProduct {
-  product_id: number;
-  name: string;
-  sku: string;
-  category_name: string;
-  total_quantity: number;
-  last_restock_date: string | null;
-  pending_order_count: number;
-}
-
 interface ProductBySku {
   product_id: number;
   name: string;
@@ -69,7 +59,7 @@ interface ProductSearchResult {
 
 export async function getProductDetails(
   db: Database,
-  productId: number
+  productId: number,
 ): Promise<ProductDetails | null> {
   const query = `
     SELECT 
@@ -95,7 +85,7 @@ export async function getProductDetails(
 
 export async function findProductsByCategory(
   db: Database,
-  categoryId: number
+  categoryId: number,
 ): Promise<ProductByCategory[]> {
   const query = `
     SELECT 
@@ -115,35 +105,9 @@ export async function findProductsByCategory(
   return results as ProductByCategory[];
 }
 
-export async function getLowStockProducts(
-  db: Database,
-  threshold: number = 20
-): Promise<LowStockProduct[]> {
-  const query = `
-    SELECT 
-        p.product_id,
-        p.name,
-        p.sku,
-        c.name as category_name,
-        COALESCE(SUM(i.quantity), 0) as total_quantity,
-        i.last_updated as last_restock_date,
-        COUNT(DISTINCT CASE WHEN o.status = 'pending' THEN oi.order_id END) as pending_order_count
-    FROM products p
-    JOIN categories c ON p.category_id = c.category_id
-    LEFT JOIN inventory i ON p.product_id = i.product_id
-    LEFT JOIN order_items oi ON p.product_id = oi.product_id
-    LEFT JOIN orders o ON oi.order_id = o.order_id
-    GROUP BY p.product_id, p.name, p.sku, c.name, i.last_updated
-    HAVING COALESCE(SUM(i.quantity), 0) < ?
-  `;
-
-  const results = await db.all(query, [threshold]);
-  return results as LowStockProduct[];
-}
-
 export async function fetchProductBySku(
   db: Database,
-  sku: string
+  sku: string,
 ): Promise<ProductBySku | null> {
   const query = `
     SELECT 
@@ -172,7 +136,7 @@ export async function fetchProductBySku(
 }
 
 export async function listAvailableProducts(
-  db: Database
+  db: Database,
 ): Promise<AvailableProduct[]> {
   const query = `
     SELECT 
@@ -196,35 +160,36 @@ export async function listAvailableProducts(
 }
 
 export async function getProductsNeedingReorder(
-  db: Database
+  db: Database,
+  threshold?: number,
 ): Promise<ProductNeedingReorder[]> {
   const query = `
-    SELECT 
+    SELECT
         p.product_id,
         p.name,
         p.sku,
         p.reorder_level,
         COALESCE(SUM(i.quantity), 0) as current_stock,
         p.description as vendor_info,
-        COALESCE(SUM(CASE 
-            WHEN o.created_at >= datetime('now', '-30 days') 
-            THEN oi.quantity 
+        COALESCE(SUM(CASE
+            WHEN o.created_at >= datetime('now', '-30 days')
+            THEN oi.quantity
         END), 0) / 30.0 as daily_sales_velocity
     FROM products p
     LEFT JOIN inventory i ON p.product_id = i.product_id
     LEFT JOIN order_items oi ON p.product_id = oi.product_id
     LEFT JOIN orders o ON oi.order_id = o.order_id
     GROUP BY p.product_id, p.name, p.sku, p.reorder_level, p.description
-    HAVING COALESCE(SUM(i.quantity), 0) < p.reorder_level
+    HAVING COALESCE(SUM(i.quantity), 0) < COALESCE(?, p.reorder_level)
   `;
 
-  const results = await db.all(query, []);
+  const results = await db.all(query, [threshold ?? null]);
   return results as ProductNeedingReorder[];
 }
 
 export async function searchProductsByName(
   db: Database,
-  searchTerm: string
+  searchTerm: string,
 ): Promise<ProductSearchResult[]> {
   const query = `
     SELECT 
