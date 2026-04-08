@@ -26,8 +26,10 @@ export function AuthDialog({
   const [mode, setMode] = useState<"signin" | "signup">(defaultMode);
 
   useEffect(() => {
-    setMode(defaultMode);
-  }, [defaultMode]);
+    if (open) {
+      setMode(defaultMode);
+    }
+  }, [open, defaultMode]);
 
   const handleSuccess = () => {
     onOpenChange(false);
